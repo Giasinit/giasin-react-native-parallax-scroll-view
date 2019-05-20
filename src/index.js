@@ -37,6 +37,7 @@ const IPropTypes = {
 	renderContentBackground: func,
 	renderFixedHeader: func,
 	renderForeground: func,
+	forceScroll: bool,
 	renderScrollComponent: func,
 	renderStickyHeader: func,
 	stickyHeaderHeight: number,
@@ -86,6 +87,7 @@ class ParallaxScrollView extends Component {
 			renderContentBackground,
 			renderFixedHeader,
 			renderForeground,
+			forceScroll,
 			renderParallaxHeader,
 			renderScrollComponent,
 			stickyHeaderOffset,
@@ -118,7 +120,7 @@ class ParallaxScrollView extends Component {
 			renderContentBackground,
 			contentContainerStyle
 		})
-		const footerSpacer = this._renderFooterSpacer({ contentBackgroundColor })
+		const footerSpacer = forceScroll ? this._renderFooterSpacer({ contentBackgroundColor }) : null
 		const maybeStickyHeader = this._maybeRenderStickyHeader({
 			parallaxHeaderHeight,
 			stickyHeaderHeight,
@@ -438,6 +440,7 @@ ParallaxScrollView.defaultProps = {
 	renderContentBackground: noRender,
 	renderParallaxHeader: renderEmpty, // Deprecated (will be removed in 0.18.0)
 	renderForeground: null,
+	forceScroll: true,
 	stickyHeaderHeight: 0,
 	stickyHeaderOffset: null,
 	contentContainerStyle: null,
